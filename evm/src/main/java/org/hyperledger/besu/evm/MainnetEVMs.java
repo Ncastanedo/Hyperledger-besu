@@ -35,6 +35,7 @@ import org.hyperledger.besu.evm.operation.BalanceOperation;
 import org.hyperledger.besu.evm.operation.BaseFeeOperation;
 import org.hyperledger.besu.evm.operation.BlockHashOperation;
 import org.hyperledger.besu.evm.operation.ByteOperation;
+import org.hyperledger.besu.evm.operation.Call2Operation;
 import org.hyperledger.besu.evm.operation.CallCodeOperation;
 import org.hyperledger.besu.evm.operation.CallDataCopyOperation;
 import org.hyperledger.besu.evm.operation.CallDataLoadOperation;
@@ -54,15 +55,12 @@ import org.hyperledger.besu.evm.operation.DataHashOperation;
 import org.hyperledger.besu.evm.operation.DataLoadNOperation;
 import org.hyperledger.besu.evm.operation.DataLoadOperation;
 import org.hyperledger.besu.evm.operation.DataSizeOperation;
+import org.hyperledger.besu.evm.operation.DelegateCall2Operation;
 import org.hyperledger.besu.evm.operation.DelegateCallOperation;
 import org.hyperledger.besu.evm.operation.DifficultyOperation;
 import org.hyperledger.besu.evm.operation.DivOperation;
 import org.hyperledger.besu.evm.operation.DupNOperation;
 import org.hyperledger.besu.evm.operation.DupOperation;
-import org.hyperledger.besu.evm.operation.Call2Operation;
-import org.hyperledger.besu.evm.operation.DelegateCall2Operation;
-import org.hyperledger.besu.evm.operation.JumpFOperation;
-import org.hyperledger.besu.evm.operation.StaticCall2Operation;
 import org.hyperledger.besu.evm.operation.EqOperation;
 import org.hyperledger.besu.evm.operation.ExpOperation;
 import org.hyperledger.besu.evm.operation.ExtCodeCopyOperation;
@@ -75,6 +73,7 @@ import org.hyperledger.besu.evm.operation.GtOperation;
 import org.hyperledger.besu.evm.operation.InvalidOperation;
 import org.hyperledger.besu.evm.operation.IsZeroOperation;
 import org.hyperledger.besu.evm.operation.JumpDestOperation;
+import org.hyperledger.besu.evm.operation.JumpFOperation;
 import org.hyperledger.besu.evm.operation.JumpOperation;
 import org.hyperledger.besu.evm.operation.JumpiOperation;
 import org.hyperledger.besu.evm.operation.Keccak256Operation;
@@ -118,6 +117,7 @@ import org.hyperledger.besu.evm.operation.SelfDestructOperation;
 import org.hyperledger.besu.evm.operation.ShlOperation;
 import org.hyperledger.besu.evm.operation.ShrOperation;
 import org.hyperledger.besu.evm.operation.SignExtendOperation;
+import org.hyperledger.besu.evm.operation.StaticCall2Operation;
 import org.hyperledger.besu.evm.operation.StaticCallOperation;
 import org.hyperledger.besu.evm.operation.StopOperation;
 import org.hyperledger.besu.evm.operation.SubOperation;
@@ -1088,14 +1088,14 @@ public class MainnetEVMs {
     registry.put(new RelativeJumpIfOperation(gasCalculator));
     registry.put(new RelativeJumpVectorOperation(gasCalculator));
 
-    //EIP-4750 EOF Code Sections
+    // EIP-4750 EOF Code Sections
     registry.put(new CallFOperation(gasCalculator));
     registry.put(new RetFOperation(gasCalculator));
 
     // EIP-6209 JUMPF Instruction
     registry.put(new JumpFOperation(gasCalculator));
 
-    //EIP-663 Unlimited Swap and Dup
+    // EIP-663 Unlimited Swap and Dup
     registry.put(new DupNOperation(gasCalculator));
     registry.put(new SwapNOperation(gasCalculator));
 
@@ -1105,7 +1105,7 @@ public class MainnetEVMs {
     registry.put(new DataSizeOperation(gasCalculator));
     registry.put(new DataCopyOperation(gasCalculator));
 
-    //TODO CREATE3, CREATE4, RETURNCONTRACT
+    // TODO CREATE3, CREATE4, RETURNCONTRACT
 
     // EIP-7069 Reworked Call Operations
     registry.put(new Call2Operation(gasCalculator));
