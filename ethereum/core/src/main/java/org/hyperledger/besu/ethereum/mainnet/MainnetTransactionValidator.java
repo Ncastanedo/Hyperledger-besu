@@ -18,16 +18,16 @@ import static org.hyperledger.besu.evm.account.Account.MAX_NONCE;
 
 import org.hyperledger.besu.crypto.SECPSignature;
 import org.hyperledger.besu.crypto.SignatureAlgorithmFactory;
+import org.hyperledger.besu.datatypes.Blob;
+import org.hyperledger.besu.datatypes.BlobsWithCommitments;
 import org.hyperledger.besu.datatypes.Hash;
+import org.hyperledger.besu.datatypes.KZGCommitment;
+import org.hyperledger.besu.datatypes.KZGProof;
 import org.hyperledger.besu.datatypes.VersionedHash;
 import org.hyperledger.besu.datatypes.Wei;
 import org.hyperledger.besu.ethereum.GasLimitCalculator;
 import org.hyperledger.besu.ethereum.core.Transaction;
 import org.hyperledger.besu.ethereum.core.TransactionFilter;
-import org.hyperledger.besu.ethereum.core.blobs.Blob;
-import org.hyperledger.besu.ethereum.core.blobs.BlobsWithCommitments;
-import org.hyperledger.besu.ethereum.core.blobs.KZGCommitment;
-import org.hyperledger.besu.ethereum.core.blobs.KZGProof;
 import org.hyperledger.besu.ethereum.mainnet.feemarket.FeeMarket;
 import org.hyperledger.besu.ethereum.transaction.TransactionInvalidReason;
 import org.hyperledger.besu.evm.account.Account;
@@ -415,6 +415,14 @@ public class MainnetTransactionValidator {
 
     return ValidationResult.valid();
   }
+
+  /*
+  private VersionedHash hashCommitment(final Bytes32 commitment) {
+    return new VersionedHash(
+        VersionedHash.SHA256_VERSION_ID, Sha256Hash.hash(commitment));
+  }
+
+   */
 
   private VersionedHash hashCommitment(final KZGCommitment commitment) {
     final SHA256Digest digest = new SHA256Digest();
